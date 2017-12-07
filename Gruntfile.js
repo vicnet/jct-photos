@@ -45,7 +45,7 @@ module.exports = function (grunt) {
                     'src/JCTPhotos-Tests.st' // list all tests in dependency order
                 ],
                 amd_namespace: 'amber-jctphotos',
-                libraries: ['amber_core/SUnit', 'amber/web/Web', 'silk/Silk']
+                libraries: ['amber_core/SUnit', 'silk/Silk']
             }
         },
 

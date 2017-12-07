@@ -27,9 +27,6 @@
   "private": false,
   "dependencies": {
     "amber": "^0.20.0",
-    "amber-compat-es2015": "^0.1.5",
-    "amber-contrib-jquery": "^0.4.1",
-    "amber-contrib-web": "^0.5.1",
     "domite": "^0.7.1",
     "silk": "^0.3.1",
   },
