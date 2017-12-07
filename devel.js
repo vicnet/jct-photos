@@ -1,6 +1,7 @@
 define([
     './testing',
     'amber/devel',
+    'bootstrap/js/bootstrap',
     // --- packages used only during development begin here ---
     'amber/legacy/Benchfib',
     'amber/legacy/Examples',
