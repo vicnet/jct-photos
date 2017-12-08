@@ -1,0 +1,6 @@
+
+.carousel-inner > .item > img
+{
+    width:auto;
+    height:calc(100vh - 50px) !important;
+}
