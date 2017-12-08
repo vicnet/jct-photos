@@ -4,8 +4,15 @@ Object subclass: #JCTPhotos
 	instanceVariableNames: ''
 	package: 'JCTPhotos'!
 
+!JCTPhotos methodsFor: 'as yet unclassified'!
+
+start
+	'#app' asSilk << 'test'
+! !
+
 !JCTPhotos class methodsFor: 'starting'!
 
 start
+	self new start
 ! !
 

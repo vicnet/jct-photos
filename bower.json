@@ -29,7 +29,8 @@
     "amber": "^0.20.0",
     "domite": "^0.7.1",
     "silk": "^0.3.1",
-    "bootstrap": "^3.3.4"
+    "bootstrap": "^3.3.4",
+    "font-awesome": "fontawesome#^4.7.0"
   },
   "devDependencies": {
     "amber-contrib-legacy": "^0.5.2",
