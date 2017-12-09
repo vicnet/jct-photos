@@ -1,5 +1,6 @@
 {
     "paths": {
-        "amber-jctphotos": "src"
+        "amber-jctphotos": "src",
+        "jct-photos-css": "css/jct-photos"
     }
 }
