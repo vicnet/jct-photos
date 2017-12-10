@@ -10,14 +10,18 @@ do: aBlock
 	cours do: aBlock
 !
 
+first
+	^ cours first
+!
+
 initialize
 	cours := #(
-		'Baby-1'
-		'Baby-2' )
+		'Baby 1'
+		'Baby 2' )
 ! !
 
 Object subclass: #JCTGallerie
-	instanceVariableNames: ''
+	instanceVariableNames: 'cours photos'
 	package: 'JCTPhotos'!
 
 !JCTGallerie methodsFor: 'as yet unclassified'!
@@ -25,12 +29,42 @@ Object subclass: #JCTGallerie
 addMenu
 	| menu |
 	menu := '#menu' asSilk.
-	JCTCours new do: [ :cours |
-		menu LI A: { 'href'->'#'. cours } ]
+	cours do: [ :cour |
+		menu LI A: { 'href'->'#'. cour } ]
+!
+
+addPhoto: photo
+	| imgs |
+	imgs := '#images' asSilk.
+	imgs DIV: { 'class'->'item'.
+		Silk IMG: {
+			'src'->photo src.
+			'class'->'img-rounded center-block'.
+			'alt'->photo name }.
+		Silk DIV: {
+			'class'->'carousel-caption'.
+			Silk H3: photo name }
+		}
+!
+
+initialize
+    "creation des objets de base"
+	cours := JCTCours new.
+	photos := JCTPhotos new
+!
+
+selection: cour
+	| imgs |
+	imgs := '#images' asSilk.
+	imgs resetContents.
+	photos select: cour do: [ :photo |
+		self addPhoto: photo ]
 !
 
 start
-	self addMenu
+	"ajout des elements d'interface"
+	self addMenu.
+	self selection: cours first
 ! !
 
 !JCTGallerie class methodsFor: 'starting'!
@@ -39,14 +73,42 @@ start
 	self new start
 ! !
 
+Object subclass: #JCTPhoto
+	instanceVariableNames: 'src'
+	package: 'JCTPhotos'!
+
+!JCTPhoto methodsFor: 'as yet unclassified'!
+
+name
+	| raw |
+	raw := (self src subStrings: $/) last.
+	raw := raw replace: $_ with: String space.
+	^ raw := (raw subStrings: $.) first
+!
+
+ref: aRef
+	src := aRef
+!
+
+src
+	^ src
+! !
+
+!JCTPhoto class methodsFor: 'as yet unclassified'!
+
+new: ref
+	^ self new ref: ref
+! !
+
 Object subclass: #JCTPhotos
-	instanceVariableNames: 'listing'
+	instanceVariableNames: 'base'
 	package: 'JCTPhotos'!
 
 !JCTPhotos methodsFor: 'as yet unclassified'!
 
 initialize
-  listing :='
+	| listing |
+	listing :='
 www.photographe.com.fr/jct2017/content/images/large/Adulte_-_1.jpg
 www.photographe.com.fr/jct2017/content/images/large/Adulte_-_2.jpg
 www.photographe.com.fr/jct2017/content/images/large/Adulte_-_3.jpg
@@ -383,6 +445,24 @@ www.photographe.com.fr/jct2017/content/images/large/Orange_-_23.jpg
 www.photographe.com.fr/jct2017/content/images/large/Orange_-_24.jpg
 www.photographe.com.fr/jct2017/content/images/large/Orange_-_25.jpg
 www.photographe.com.fr/jct2017/content/images/large/Orange_-_26.jpg
-'
+'.
+	base := listing lines
+!
+
+select: cours
+	| ref |
+	ref := self filenameFrom: cours.
+	^ base select: [ :img | img includesSubString: ref ]
+		   thenCollect: [ :img | JCTPhoto new: img ]
+!
+
+select: cours do: aBlock
+	(self select: cours) do: aBlock
+! !
+
+!JCTPhotos methodsFor: 'private'!
+
+filenameFrom: cours
+	^ cours replace: String space with: $_
 ! !
 
