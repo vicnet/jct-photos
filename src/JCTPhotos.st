@@ -26,17 +26,36 @@ Object subclass: #JCTGallerie
 
 !JCTGallerie methodsFor: 'as yet unclassified'!
 
+active: group
+	| elt |
+	elt := group element firstElementChild.
+	elt className: (elt className, ' active')
+!
+
+addIndicator: num
+	^ self indicators LI: {
+		'data-target'->'#gallerie'.
+		'data-slide-to'->num
+		}
+!
+
 addMenu
-	| menu |
-	menu := '#menu' asSilk.
 	cours do: [ :cour |
-		menu LI A: { 'href'->'#'. cour } ]
+		self addMenuEntry: cour ]
+!
+
+addMenuEntry: cour
+	| a |
+	a := '#menu' asSilk LI A: {
+			'href'->'#'.
+			cour
+			}.
+	a on: 'click' bind: [
+		self select: cour ]
 !
 
 addPhoto: photo
-	| imgs |
-	imgs := '#images' asSilk.
-	imgs DIV: { 'class'->'item'.
+	^ self images DIV: { 'class'->'item'.
 		Silk IMG: {
 			'src'->photo src.
 			'class'->'img-rounded center-block'.
@@ -47,24 +66,51 @@ addPhoto: photo
 		}
 !
 
+images
+	^ '.carousel-inner' asSilk
+!
+
+indicators
+	^ '.carousel-indicators' asSilk
+!
+
 initialize
     "creation des objets de base"
 	cours := JCTCours new.
 	photos := JCTPhotos new
 !
 
-selection: cour
-	| imgs |
-	imgs := '#images' asSilk.
+select: cour
+	| imgs inds num |
+	imgs := self images.
+	inds := self indicators.
+	
 	imgs resetContents.
+	inds resetContents.
+
+	num := 0.
 	photos select: cour do: [ :photo |
-		self addPhoto: photo ]
+		self addPhoto: photo.
+		self addIndicator: num
+		].
+
+	self active: inds.
+	self active: imgs.
+
+	self slide
+!
+
+slide
+	| carousel |
+	carousel := '#gallerie' asJQuery data: 'bs.carousel'.
+	carousel ifNotNil: [
+		carousel slide ]
 !
 
 start
 	"ajout des elements d'interface"
 	self addMenu.
-	self selection: cours first
+	self select: cours first
 ! !
 
 !JCTGallerie class methodsFor: 'starting'!

@@ -86,35 +86,123 @@ $globals.JCTCours);
 $core.addClass("JCTGallerie", $globals.Object, ["cours", "photos"], "JCTPhotos");
 $core.addMethod(
 $core.method({
+selector: "active:",
+protocol: "as yet unclassified",
+fn: function(group){
+var self=this,$self=this;
+var elt;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+elt=$recv($recv(group)._element())._firstElementChild();
+$recv(elt)._className_($recv($recv(elt)._className()).__comma(" active"));
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"active:",{group:group,elt:elt},$globals.JCTGallerie)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["group"],
+source: "active: group\x0a\x09| elt |\x0a\x09elt := group element firstElementChild.\x0a\x09elt className: (elt className, ' active')",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["firstElementChild", "element", "className:", ",", "className"]
+}),
+$globals.JCTGallerie);
+
+$core.addMethod(
+$core.method({
+selector: "addIndicator:",
+protocol: "as yet unclassified",
+fn: function(num){
+var self=this,$self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1,$3,$2;
+$1=$self._indicators();
+$3="data-target".__minus_gt("#gallerie");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["->"]=1;
+//>>excludeEnd("ctx");
+$2=[$3,"data-slide-to".__minus_gt(num)];
+return $recv($1)._LI_($2);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"addIndicator:",{num:num},$globals.JCTGallerie)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["num"],
+source: "addIndicator: num\x0a\x09^ self indicators LI: {\x0a\x09\x09'data-target'->'#gallerie'.\x0a\x09\x09'data-slide-to'->num\x0a\x09\x09}",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["LI:", "indicators", "->"]
+}),
+$globals.JCTGallerie);
+
+$core.addMethod(
+$core.method({
 selector: "addMenu",
 protocol: "as yet unclassified",
 fn: function(){
 var self=this,$self=this;
-var menu;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-menu="#menu"._asSilk();
 $recv($self["@cours"])._do_((function(cour){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
-return $recv($recv(menu)._LI())._A_(["href".__minus_gt("#"),cour]);
+return $self._addMenuEntry_(cour);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({cour:cour},$ctx1,1)});
 //>>excludeEnd("ctx");
 }));
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"addMenu",{menu:menu},$globals.JCTGallerie)});
+}, function($ctx1) {$ctx1.fill(self,"addMenu",{},$globals.JCTGallerie)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "addMenu\x0a\x09| menu |\x0a\x09menu := '#menu' asSilk.\x0a\x09cours do: [ :cour |\x0a\x09\x09menu LI A: { 'href'->'#'. cour } ]",
+source: "addMenu\x0a\x09cours do: [ :cour |\x0a\x09\x09self addMenuEntry: cour ]",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["asSilk", "do:", "A:", "LI", "->"]
+messageSends: ["do:", "addMenuEntry:"]
+}),
+$globals.JCTGallerie);
+
+$core.addMethod(
+$core.method({
+selector: "addMenuEntry:",
+protocol: "as yet unclassified",
+fn: function(cour){
+var self=this,$self=this;
+var a;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+a=$recv($recv("#menu"._asSilk())._LI())._A_(["href".__minus_gt("#"),cour]);
+$recv(a)._on_bind_("click",(function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return $self._select_(cour);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)});
+//>>excludeEnd("ctx");
+}));
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"addMenuEntry:",{cour:cour,a:a},$globals.JCTGallerie)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["cour"],
+source: "addMenuEntry: cour\x0a\x09| a |\x0a\x09a := '#menu' asSilk LI A: {\x0a\x09\x09\x09'href'->'#'.\x0a\x09\x09\x09cour\x0a\x09\x09\x09}.\x0a\x09a on: 'click' bind: [\x0a\x09\x09self select: cour ]",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["A:", "LI", "asSilk", "->", "on:bind:", "select:"]
 }),
 $globals.JCTGallerie);
 
@@ -124,51 +212,95 @@ selector: "addPhoto:",
 protocol: "as yet unclassified",
 fn: function(photo){
 var self=this,$self=this;
-var imgs;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-var $1,$3,$6,$7,$9,$8,$5,$4,$2;
-imgs="#images"._asSilk();
-$1=imgs;
-$3="class".__minus_gt("item");
+var $2,$4,$7,$8,$10,$9,$6,$5,$3,$1;
+$2=$self._images();
+$4="class".__minus_gt("item");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["->"]=1;
 //>>excludeEnd("ctx");
-$6="src".__minus_gt($recv(photo)._src());
+$7="src".__minus_gt($recv(photo)._src());
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["->"]=2;
 //>>excludeEnd("ctx");
-$7="class".__minus_gt("img-rounded center-block");
+$8="class".__minus_gt("img-rounded center-block");
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["->"]=3;
 //>>excludeEnd("ctx");
-$9=$recv(photo)._name();
+$10=$recv(photo)._name();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["name"]=1;
 //>>excludeEnd("ctx");
-$8="alt".__minus_gt($9);
+$9="alt".__minus_gt($10);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["->"]=4;
 //>>excludeEnd("ctx");
-$5=[$6,$7,$8];
-$4=$recv($globals.Silk)._IMG_($5);
-$2=[$3,$4,$recv($globals.Silk)._DIV_(["class".__minus_gt("carousel-caption"),$recv($globals.Silk)._H3_($recv(photo)._name())])];
-$recv($1)._DIV_($2);
+$6=[$7,$8,$9];
+$5=$recv($globals.Silk)._IMG_($6);
+$3=[$4,$5,$recv($globals.Silk)._DIV_(["class".__minus_gt("carousel-caption"),$recv($globals.Silk)._H3_($recv(photo)._name())])];
+$1=$recv($2)._DIV_($3);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 $ctx1.sendIdx["DIV:"]=1;
 //>>excludeEnd("ctx");
-return self;
+return $1;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"addPhoto:",{photo:photo,imgs:imgs},$globals.JCTGallerie)});
+}, function($ctx1) {$ctx1.fill(self,"addPhoto:",{photo:photo},$globals.JCTGallerie)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["photo"],
-source: "addPhoto: photo\x0a\x09| imgs |\x0a\x09imgs := '#images' asSilk.\x0a\x09imgs DIV: { 'class'->'item'.\x0a\x09\x09Silk IMG: {\x0a\x09\x09\x09'src'->photo src.\x0a\x09\x09\x09'class'->'img-rounded center-block'.\x0a\x09\x09\x09'alt'->photo name }.\x0a\x09\x09Silk DIV: {\x0a\x09\x09\x09'class'->'carousel-caption'.\x0a\x09\x09\x09Silk H3: photo name }\x0a\x09\x09}",
+source: "addPhoto: photo\x0a\x09^ self images DIV: { 'class'->'item'.\x0a\x09\x09Silk IMG: {\x0a\x09\x09\x09'src'->photo src.\x0a\x09\x09\x09'class'->'img-rounded center-block'.\x0a\x09\x09\x09'alt'->photo name }.\x0a\x09\x09Silk DIV: {\x0a\x09\x09\x09'class'->'carousel-caption'.\x0a\x09\x09\x09Silk H3: photo name }\x0a\x09\x09}",
 referencedClasses: ["Silk"],
 //>>excludeEnd("ide");
-messageSends: ["asSilk", "DIV:", "->", "IMG:", "src", "name", "H3:"]
+messageSends: ["DIV:", "images", "->", "IMG:", "src", "name", "H3:"]
+}),
+$globals.JCTGallerie);
+
+$core.addMethod(
+$core.method({
+selector: "images",
+protocol: "as yet unclassified",
+fn: function(){
+var self=this,$self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+return ".carousel-inner"._asSilk();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"images",{},$globals.JCTGallerie)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "images\x0a\x09^ '.carousel-inner' asSilk",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["asSilk"]
+}),
+$globals.JCTGallerie);
+
+$core.addMethod(
+$core.method({
+selector: "indicators",
+protocol: "as yet unclassified",
+fn: function(){
+var self=this,$self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+return ".carousel-indicators"._asSilk();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"indicators",{},$globals.JCTGallerie)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "indicators\x0a\x09^ '.carousel-indicators' asSilk",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["asSilk"]
 }),
 $globals.JCTGallerie);
 
@@ -202,36 +334,81 @@ $globals.JCTGallerie);
 
 $core.addMethod(
 $core.method({
-selector: "selection:",
+selector: "select:",
 protocol: "as yet unclassified",
 fn: function(cour){
 var self=this,$self=this;
-var imgs;
+var imgs,inds,num;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-imgs="#images"._asSilk();
+imgs=$self._images();
+inds=$self._indicators();
 $recv(imgs)._resetContents();
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["resetContents"]=1;
+//>>excludeEnd("ctx");
+$recv(inds)._resetContents();
+num=(0);
 $recv($self["@photos"])._select_do_(cour,(function(photo){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
-return $self._addPhoto_(photo);
+$self._addPhoto_(photo);
+return $self._addIndicator_(num);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({photo:photo},$ctx1,1)});
 //>>excludeEnd("ctx");
 }));
+$self._active_(inds);
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+$ctx1.sendIdx["active:"]=1;
+//>>excludeEnd("ctx");
+$self._active_(imgs);
+$self._slide();
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"selection:",{cour:cour,imgs:imgs},$globals.JCTGallerie)});
+}, function($ctx1) {$ctx1.fill(self,"select:",{cour:cour,imgs:imgs,inds:inds,num:num},$globals.JCTGallerie)});
 //>>excludeEnd("ctx");
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["cour"],
-source: "selection: cour\x0a\x09| imgs |\x0a\x09imgs := '#images' asSilk.\x0a\x09imgs resetContents.\x0a\x09photos select: cour do: [ :photo |\x0a\x09\x09self addPhoto: photo ]",
+source: "select: cour\x0a\x09| imgs inds num |\x0a\x09imgs := self images.\x0a\x09inds := self indicators.\x0a\x09\x0a\x09imgs resetContents.\x0a\x09inds resetContents.\x0a\x0a\x09num := 0.\x0a\x09photos select: cour do: [ :photo |\x0a\x09\x09self addPhoto: photo.\x0a\x09\x09self addIndicator: num\x0a\x09\x09].\x0a\x0a\x09self active: inds.\x0a\x09self active: imgs.\x0a\x0a\x09self slide",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["asSilk", "resetContents", "select:do:", "addPhoto:"]
+messageSends: ["images", "indicators", "resetContents", "select:do:", "addPhoto:", "addIndicator:", "active:", "slide"]
+}),
+$globals.JCTGallerie);
+
+$core.addMethod(
+$core.method({
+selector: "slide",
+protocol: "as yet unclassified",
+fn: function(){
+var self=this,$self=this;
+var carousel;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1,$receiver;
+carousel=$recv("#gallerie"._asJQuery())._data_("bs.carousel");
+$1=carousel;
+if(($receiver = $1) == null || $receiver.a$nil){
+$1;
+} else {
+$recv(carousel)._slide();
+}
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"slide",{carousel:carousel},$globals.JCTGallerie)});
+//>>excludeEnd("ctx");
+},
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "slide\x0a\x09| carousel |\x0a\x09carousel := '#gallerie' asJQuery data: 'bs.carousel'.\x0a\x09carousel ifNotNil: [\x0a\x09\x09carousel slide ]",
+referencedClasses: [],
+//>>excludeEnd("ide");
+messageSends: ["data:", "asJQuery", "ifNotNil:", "slide"]
 }),
 $globals.JCTGallerie);
 
@@ -245,7 +422,7 @@ var self=this,$self=this;
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
 $self._addMenu();
-$self._selection_($recv($self["@cours"])._first());
+$self._select_($recv($self["@cours"])._first());
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx1) {$ctx1.fill(self,"start",{},$globals.JCTGallerie)});
@@ -253,10 +430,10 @@ return self;
 },
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "start\x0a\x09\x22ajout des elements d'interface\x22\x0a\x09self addMenu.\x0a\x09self selection: cours first",
+source: "start\x0a\x09\x22ajout des elements d'interface\x22\x0a\x09self addMenu.\x0a\x09self select: cours first",
 referencedClasses: [],
 //>>excludeEnd("ide");
-messageSends: ["addMenu", "selection:", "first"]
+messageSends: ["addMenu", "select:", "first"]
 }),
 $globals.JCTGallerie);
 

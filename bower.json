@@ -30,7 +30,8 @@
     "domite": "^0.7.1",
     "silk": "^0.3.1",
     "bootstrap": "^3.3.4",
-    "font-awesome": "fontawesome#^4.7.0"
+    "font-awesome": "fontawesome#^4.7.0",
+    "amber-compat-es2015": "^0.1.5"
   },
   "devDependencies": {
     "amber-contrib-legacy": "^0.5.2",
