@@ -16,8 +16,20 @@ first
 
 initialize
 	cours := #(
-		'Baby 1'
-		'Baby 2' )
+'Baby 1'
+'Baby 2'
+'Baby 3'
+'Blanche 1 Blanche Jaune 1'
+'Blanche 2'
+'Blanche Jaune 2'
+'Blanche Jaune 3'
+'Jaune'
+'Jaune Orange'
+'Orange'
+'Moyen'
+'Adulte Loisir'
+'Adulte'
+'Jujitsu' )
 ! !
 
 Object subclass: #JCTGallerie
@@ -91,7 +103,8 @@ select: cour
 	num := 0.
 	photos select: cour do: [ :photo |
 		self addPhoto: photo.
-		self addIndicator: num
+		self addIndicator: num.
+		num := num+1
 		].
 
 	self active: inds.
@@ -492,14 +505,12 @@ www.photographe.com.fr/jct2017/content/images/large/Orange_-_24.jpg
 www.photographe.com.fr/jct2017/content/images/large/Orange_-_25.jpg
 www.photographe.com.fr/jct2017/content/images/large/Orange_-_26.jpg
 '.
-	base := listing lines
+	base := listing lines collect: [ :img |
+		JCTPhoto new: img ]
 !
 
 select: cours
-	| ref |
-	ref := self filenameFrom: cours.
-	^ base select: [ :img | img includesSubString: ref ]
-		   thenCollect: [ :img | JCTPhoto new: img ]
+	^ base select: [ :img | img name match: $^,cours,' -' ]
 !
 
 select: cours do: aBlock
