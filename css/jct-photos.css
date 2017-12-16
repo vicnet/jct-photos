@@ -1,6 +1,16 @@
-
 .carousel-inner > .item > img
 {
-    width:auto;
-    height:calc(100vh - 50px) !important;
+    width: auto;
+    height: calc(100vh * 0.9) !important;
+}
+
+.carousel-inner > .item > img.grande
+{
+    width: auto;
+    height: calc(100vh * 0.9) !important;
+}
+.carousel-inner > .item > img.petite
+{
+    width: auto;
+    height: calc(100vh * 0.9 / 3) !important;
 }
